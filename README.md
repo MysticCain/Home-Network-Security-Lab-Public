@@ -28,16 +28,28 @@ Designed and configured a segmented home network using TP-Link Omada equipment t
 ## Logical network design
 
 ```mermaid
-flowchart TD
-    Internet((Internet)) --> ISP\[AT\&T BGW320 gateway]
-    ISP --> R\[Omada ER605 router / firewall]
-    R --> S\[Omada ES208G managed switch]
-    S --> AP\[Omada EAP720 access point]
-    S --> C\[Controller / wired clients]
-    AP --> T\[Trusted Wi-Fi - VLAN 10]
-    AP --> I\[IoT Wi-Fi - VLAN 20]
-    AP --> G\[Guest Wi-Fi - VLAN 30]
-    S -. tagged management network .-> M\[Infrastructure management - VLAN 99]
+flowchart TB
+    Internet((Internet))
+    ISP["AT&T BGW320 Gateway"]
+    R["Omada ER605 Router / Firewall"]
+    S["Omada ES208G Managed Switch"]
+    AP["Omada EAP720 Access Point"]
+    C["Controller / Wired Clients"]
+    M["Infrastructure Management - VLAN 99"]
+    T["Trusted Wi-Fi - VLAN 10"]
+    I["IoT Wi-Fi - VLAN 20"]
+    G["Guest Wi-Fi - VLAN 30"]
+
+    Internet --> ISP
+    ISP --> R
+    R --> S
+    S --> AP
+    S --> C
+    S -.-> M
+    AP --> T
+    AP --> I
+    AP --> G
+
 ```
 
 **Diagram scope:** Logical topology, not a port-by-port wiring diagram. Physical port assignments should be confirmed before publishing a detailed cabling map.
